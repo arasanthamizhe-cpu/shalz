@@ -1,0 +1,8 @@
+{
+  "name": "shalz-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for Shalini — ennodu inainthiru",
+  "engines": {
+    "node": "18.x"
+  }
+}

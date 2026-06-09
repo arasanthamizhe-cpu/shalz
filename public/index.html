@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shalz — Ennodu Inainthiru</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1008;
+    --ink-soft: #4a3d2e;
+    --ink-muted: #8a7a6a;
+    --gold: #c9965a;
+    --gold-light: #e8c99a;
+    --gold-pale: #f7edd8;
+    --rose: #c97a8a;
+    --rose-light: #f2d5db;
+    --cream: #fdf6ee;
+    --white: #ffffff;
+    --border: rgba(201,150,90,0.2);
+    --border-soft: rgba(201,150,90,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(253,246,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--ink);
+    letter-spacing: 0.02em; text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-soft); text-decoration: none; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 6rem 2.5rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 60vw; height: 80vh;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(201,150,90,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .hero-name em {
+    font-style: italic; color: var(--gold); display: block;
+  }
+  .hero-subtitle {
+    font-size: 1rem; color: var(--ink-soft);
+    margin: 1.2rem 0 2rem;
+    max-width: 420px; line-height: 1.8;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem;
+  }
+  .tag {
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em;
+    background: var(--white);
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.8rem 1.8rem;
+    background: var(--gold);
+    color: var(--white); border: none; border-radius: 6px;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em;
+    cursor: pointer; text-decoration: none; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-1px); }
+  .btn-outline {
+    padding: 0.8rem 1.8rem;
+    background: transparent;
+    color: var(--ink); border: 1px solid var(--border);
+    border-radius: 6px; font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; text-decoration: none; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Hero visual side */
+  .hero-visual {
+    position: relative; display: flex; justify-content: center; align-items: center;
+  }
+  .hero-frame {
+    width: 340px; height: 420px;
+    border-radius: 180px 180px 120px 120px;
+    background: linear-gradient(160deg, var(--gold-pale) 0%, var(--rose-light) 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    border: 2px solid var(--gold-light);
+  }
+  .hero-initial {
+    font-family: 'Playfair Display', serif;
+    font-size: 9rem; color: var(--gold);
+    opacity: 0.25; font-style: italic; line-height: 1;
+    user-select: none;
+  }
+  .hero-badge {
+    position: absolute; bottom: -16px; right: -16px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 0.9rem 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+  .badge-label { font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .badge-value { font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+  .hero-badge2 {
+    position: absolute; top: 20px; left: -20px;
+    background: var(--gold); border-radius: 10px; padding: 0.7rem 1rem;
+    box-shadow: 0 4px 16px rgba(201,150,90,0.3);
+  }
+  .badge2-text { font-size: 0.75rem; color: var(--white); font-weight: 600; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 48px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2;
+  }
+  .section-body {
+    font-size: 1rem; color: var(--ink-soft); max-width: 560px; line-height: 1.85;
+  }
+  .divider { width: 100%; height: 1px; background: var(--border-soft); margin: 0; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .stat-card {
+    background: var(--white); border: 1px solid var(--border-soft);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--gold); font-weight: 700; line-height: 1;
+  }
+  .stat-desc { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.3rem; letter-spacing: 0.04em; }
+  .dream-card {
+    background: var(--ink); border-radius: 16px; padding: 2rem;
+    color: var(--gold-pale);
+  }
+  .dream-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    color: var(--gold-light); margin-bottom: 0.8rem;
+  }
+  .dream-card p { font-size: 0.9rem; color: rgba(247,237,216,0.75); line-height: 1.8; }
+  .dream-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+  /* POETRY / INSTAGRAM */
+  .insta-section { background: var(--white); padding: 6rem 0; }
+  .insta-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+  .insta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
+  .insta-card {
+    border-radius: 14px; overflow: hidden; border: 1px solid var(--border-soft);
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-decoration: none; display: block;
+  }
+  .insta-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .insta-thumb {
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, var(--rose-light) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem; color: var(--ink-soft); text-align: center;
+    padding: 1rem; font-style: italic; line-height: 1.6;
+  }
+  .insta-card:nth-child(2) .insta-thumb { background: linear-gradient(135deg, #e8d5f5 0%, var(--rose-light) 100%); }
+  .insta-card:nth-child(3) .insta-thumb { background: linear-gradient(135deg, #d5e8f5 0%, #e0f0e8 100%); }
+  .insta-card:nth-child(4) .insta-thumb { background: linear-gradient(135deg, #f5f0d5 0%, var(--gold-pale) 100%); }
+  .insta-card:nth-child(5) .insta-thumb { background: linear-gradient(135deg, var(--rose-light) 0%, #f5e0d5 100%); }
+  .insta-card:nth-child(6) .insta-thumb { background: linear-gradient(135deg, #e0f5ec 0%, #d5eef5 100%); }
+  .insta-meta {
+    padding: 0.9rem 1rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--white);
+  }
+  .insta-handle { font-size: 0.75rem; color: var(--ink-muted); }
+  .insta-arrow { font-size: 0.75rem; color: var(--gold); }
+  .insta-cta-row {
+    display: flex; gap: 1rem; align-items: center; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+
+  /* PODCAST */
+  .podcast-section { background: var(--ink); padding: 6rem 0; }
+  .podcast-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+  .podcast-inner .section-label { color: var(--gold-light); }
+  .podcast-inner .section-label::after { background: var(--gold-light); }
+  .podcast-inner .section-title { color: var(--gold-pale); }
+  .podcast-inner .section-body { color: rgba(247,237,216,0.65); }
+  .podcast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .episode-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(201,150,90,0.2);
+    border-radius: 14px; padding: 1.5rem;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .episode-card:hover { background: rgba(201,150,90,0.08); border-color: rgba(201,150,90,0.4); }
+  .episode-num { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; font-weight: 600; }
+  .episode-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--gold-pale); margin-bottom: 0.5rem; line-height: 1.35; }
+  .episode-desc { font-size: 0.82rem; color: rgba(247,237,216,0.5); line-height: 1.7; }
+  .episode-foot {
+    display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;
+  }
+  .play-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold); border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: transform 0.15s;
+    color: var(--white);
+  }
+  .play-btn:hover { transform: scale(1.08); }
+  .play-btn svg { width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
+  .duration { font-size: 0.75rem; color: rgba(247,237,216,0.4); }
+  .spotify-embed-row { margin-top: 2.5rem; }
+  .spotify-btn {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    background: #1DB954; color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.88rem; font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .spotify-btn:hover { opacity: 0.88; }
+  .spotify-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--white); border: 1px solid var(--border-soft);
+    border-radius: 10px; text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .contact-row:hover { border-color: var(--gold); transform: translateX(4px); }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ci-spotify { background: #1DB954; }
+  .ci-instagram { background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); }
+  .ci-mail { background: var(--gold-pale); }
+  .contact-icon svg { width: 20px; height: 20px; fill: white; }
+  .ci-mail svg { fill: var(--gold); }
+  .contact-label { font-size: 0.72rem; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.1rem; }
+  .contact-value { font-size: 0.92rem; color: var(--ink); font-weight: 500; }
+  .contact-form {
+    background: var(--white); border: 1px solid var(--border-soft);
+    border-radius: 16px; padding: 2rem;
+  }
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 1.2rem;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { font-size: 0.78rem; color: var(--ink-muted); letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem; text-transform: uppercase; }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--ink);
+    background: var(--cream); outline: none; transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-submit {
+    width: 100%; padding: 0.85rem;
+    background: var(--gold); color: var(--white);
+    border: none; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 600; letter-spacing: 0.04em;
+    cursor: pointer; transition: background 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .form-submit:hover { background: var(--ink); }
+  .success-msg {
+    display: none; padding: 0.8rem 1rem;
+    background: #f0faf4; border: 1px solid #a8dfbb; border-radius: 8px;
+    color: #1a6e3a; font-size: 0.85rem; margin-top: 0.8rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 3rem 2.5rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--gold-pale);
+    font-style: italic; margin-bottom: 0.5rem;
+  }
+  .footer-tagline { font-size: 0.8rem; color: rgba(247,237,216,0.4); margin-bottom: 1.5rem; letter-spacing: 0.08em; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+  .footer-links a { font-size: 0.78rem; color: rgba(247,237,216,0.5); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 0.72rem; color: rgba(247,237,216,0.25); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 3rem; gap: 2rem; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .insta-grid { grid-template-columns: repeat(2, 1fr); }
+    .podcast-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.5rem; }
+    .podcast-inner, .insta-inner { padding: 0 1.5rem; }
+    .podcast-section, .insta-section { padding: 4rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Shalz</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#poetry">Poetry</a></li>
+    <li><a href="#podcast">Podcast</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style="max-width:100%; padding-top:7rem;">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Tamil Poet · Podcaster · Aspiring Director</div>
+    <h1 class="hero-name">
+      Shalini
+      <em>Shalz</em>
+    </h1>
+    <p class="hero-subtitle">
+      Weaving Tamil verses into sound and soul — through poetry that breathes, podcasts that resonate, and a vision that dreams beyond the frame.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">ennodu inainthiru</span>
+      <span class="tag">Tamil Poetry</span>
+      <span class="tag">Spotify Podcaster</span>
+      <span class="tag">Filmmaker at Heart</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Listen on Spotify
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Follow on Instagram
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-frame">
+      <span class="hero-initial">S</span>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-label">Poetry & Podcast</div>
+      <div class="badge-value">ennodu inainthiru</div>
+    </div>
+    <div class="hero-badge2">
+      <div class="badge2-text">🎙 Live on Spotify</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Shalz</div>
+      <h2 class="section-title">Words that feel like home</h2>
+      <p class="section-body">
+        Shalini — known by heart as <strong>Shalz</strong> — is a Tamil poet and podcaster who pours emotion into language with rare sincerity. Under the name <em>ennodu inainthiru</em> ("be with me"), she shares verses and spoken reflections that invite you to sit still with your feelings for a while.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        Her work lives at the intersection of Tamil literary tradition and the intimate, unscripted texture of modern storytelling. One day, she intends to bring these stories to the screen as a director.
+      </p>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">✦</div>
+          <div class="stat-desc">Tamil poetry on Instagram</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">🎙</div>
+          <div class="stat-desc">Podcast on Spotify</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">🎬</div>
+          <div class="stat-desc">Aspiring film director</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">💫</div>
+          <div class="stat-desc">Stories told with soul</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dream-card">
+        <div class="dream-icon">🎬</div>
+        <h3>The Dream Behind the Words</h3>
+        <p>
+          Every poem Shalz writes, every episode she records, is a step toward a larger canvas — cinema. She believes that the precision of Tamil verse and the intimacy of podcasting are the best training ground for a director who wants to make audiences feel, not just watch.
+        </p>
+        <p style="margin-top:0.9rem;">
+          The name <em>ennodu inainthiru</em> is not just a page — it's a promise: to stay with you through every medium she creates in.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INSTAGRAM / POETRY -->
+<div class="insta-section" id="poetry">
+  <div class="insta-inner">
+    <div class="section-label">Tamil Poetry</div>
+    <h2 class="section-title">Words on the wall</h2>
+    <p class="section-body">
+      Shalini shares original Tamil poetry on Instagram under <em>ennodu inainthiru</em> — verses about longing, belonging, silence, and becoming. Each post is a tiny world you can walk into.
+    </p>
+
+    <div class="insta-grid">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">எனக்கு நீ தான் கதை<br><span style="font-size:0.75rem;opacity:0.6">You are my story</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">மழை போல் பேசினாய்<br><span style="font-size:0.75rem;opacity:0.6">You spoke like rain</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">நிழல் போல் உடன் வா<br><span style="font-size:0.75rem;opacity:0.6">Come with me like a shadow</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">கண்கள் பேசும் மொழி<br><span style="font-size:0.75rem;opacity:0.6">The language eyes speak</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">ஏங்கும் இதயம் தான்<br><span style="font-size:0.75rem;opacity:0.6">The longing heart</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
+        <div class="insta-thumb">உன்னோடு இணைந்திரு<br><span style="font-size:0.75rem;opacity:0.6">Be with me always</span></div>
+        <div class="insta-meta">
+          <span class="insta-handle">@_ennodu_inainthiru_</span>
+          <span class="insta-arrow">↗</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="insta-cta-row">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="btn-primary" style="background:#E1306C;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+        See all poems on Instagram
+      </a>
+      <span style="font-size:0.82rem; color:var(--ink-muted);">Follow <strong>@_ennodu_inainthiru_</strong> for new verses</span>
+    </div>
+  </div>
+</div>
+
+<!-- PODCAST -->
+<div class="podcast-section" id="podcast">
+  <div class="podcast-inner">
+    <div class="section-label" style="color:var(--gold);">Podcast</div>
+    <h2 class="section-title" style="color:var(--gold-pale);">Ennodu Inainthiru on Spotify</h2>
+    <p class="section-body">
+      Shalini's podcast is where her poetry finds its voice — recorded reflections, spoken verse, and the kinds of conversations that happen only in the quiet hours.
+    </p>
+
+    <div class="podcast-grid">
+      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="episode-card" style="text-decoration:none;">
+        <div class="episode-num">Latest Episode</div>
+        <div class="episode-title">ennodu inainthiru — New Episode</div>
+        <div class="episode-desc">Tune in to Shalz's latest spoken word and reflection. Each episode is a quiet conversation with your own feelings.</div>
+        <div class="episode-foot">
+          <button class="play-btn" onclick="window.open('https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD','_blank'); return false;">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="duration">Open in Spotify ↗</span>
+        </div>
+      </a>
+      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="episode-card" style="text-decoration:none;">
+        <div class="episode-num">All Episodes</div>
+        <div class="episode-title">Explore the full archive</div>
+        <div class="episode-desc">Every episode of ennodu inainthiru lives on Spotify — poetry read aloud, stories breathed into being, and the silences between.</div>
+        <div class="episode-foot">
+          <button class="play-btn" onclick="window.open('https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD','_blank'); return false;">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="duration">Full show ↗</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="spotify-embed-row" style="margin-top:2rem;">
+      <iframe
+        src="https://open.spotify.com/embed/show/1rVRaemGWST0Zxme83IFcD?utm_source=generator&theme=0"
+        width="100%" height="232" frameBorder="0"
+        allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        style="border-radius:14px; display:block; margin-bottom:1.5rem;"
+        loading="lazy">
+      </iframe>
+      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="spotify-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.35c-.2.3-.6.4-.9.2-2.47-1.5-5.59-1.84-9.26-.99-.35.08-.7-.13-.79-.49-.08-.35.13-.7.49-.79 4.01-.92 7.45-.52 10.24 1.15.3.18.4.59.22.92zm1.24-2.76c-.24.38-.75.5-1.13.26-2.83-1.74-7.14-2.24-10.49-1.23-.43.13-.89-.11-1.02-.54-.13-.43.11-.89.54-1.02 3.82-1.16 8.57-.59 11.84 1.4.38.24.5.75.26 1.13zm.1-2.87c-3.39-2.02-8.99-2.2-12.23-1.22-.52.16-1.07-.14-1.23-.66-.16-.52.14-1.07.66-1.23 3.72-1.13 9.91-.91 13.81 1.41.47.28.62.89.34 1.36-.28.47-.89.62-1.35.34z"/></svg>
+        Open Full Podcast on Spotify
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2 class="section-title">Connect with Shalz</h2>
+
+  <div class="contact-grid">
+    <div>
+      <p style="color:var(--ink-soft); margin-bottom:1.8rem; font-size:0.95rem; line-height:1.8;">
+        For collaborations, features, or just to say her poems made you feel something — reach out. She's building something beautiful and loves meeting people who feel it too.
+      </p>
+      <div class="contact-info">
+        <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="contact-row">
+          <div class="contact-icon ci-spotify">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.35c-.2.3-.6.4-.9.2-2.47-1.5-5.59-1.84-9.26-.99-.35.08-.7-.13-.79-.49-.08-.35.13-.7.49-.79 4.01-.92 7.45-.52 10.24 1.15.3.18.4.59.22.92zm1.24-2.76c-.24.38-.75.5-1.13.26-2.83-1.74-7.14-2.24-10.49-1.23-.43.13-.89-.11-1.02-.54-.13-.43.11-.89.54-1.02 3.82-1.16 8.57-.59 11.84 1.4.38.24.5.75.26 1.13zm.1-2.87c-3.39-2.02-8.99-2.2-12.23-1.22-.52.16-1.07-.14-1.23-.66-.16-.52.14-1.07.66-1.23 3.72-1.13 9.91-.91 13.81 1.41.47.28.62.89.34 1.36-.28.47-.89.62-1.35.34z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Podcast</div>
+            <div class="contact-value">ennodu inainthiru on Spotify</div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="contact-row">
+          <div class="contact-icon ci-instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">@_ennodu_inainthiru_</div>
+          </div>
+        </a>
+        <a href="mailto:shalzpoetry@gmail.com" class="contact-row">
+          <div class="contact-icon ci-mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">ramachndranshalini@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Send a message</h3>
+      <div class="form-group">
+        <label>Your name</label>
+        <input type="text" id="fname" placeholder="What should she call you?">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="femail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="fmsg" rows="4" placeholder="Tell her what her work means to you, or what you'd like to create together..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send message →</button>
+      <div class="success-msg" id="successMsg">
+        ✓ Message sent! Shalz will get back to you soon.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Shalz</div>
+  <div class="footer-tagline">ennodu inainthiru — be with me</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#poetry">Poetry</a>
+    <a href="#podcast">Podcast</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank">Instagram</a>
+    <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank">Spotify</a>
+  </div>
+  <div class="footer-copy">© 2024 Shalini · Made with love for Tamil poetry and big dreams</div>
+</footer>
+
+<script>
+async function submitForm() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const msg = document.getElementById('fmsg').value.trim();
+  if (!name || !email || !msg) {
+    alert('Please fill in all fields before sending.');
+    return;
+  }
+  const btn = document.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message: msg })
+    });
+    if (res.ok) {
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('fname').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fmsg').value = '';
+    } else {
+      const d = await res.json();
+      alert('Could not send: ' + (d.error || 'unknown error'));
+    }
+  } catch (e) {
+    alert('Network error. Please try again.');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send message →';
+}
+</script>
+</body>
+</html>
