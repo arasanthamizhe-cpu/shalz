@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shalz — Ennodu Inainthiru</title>
+<title>Shalini Ramachandran — Ennodu Inainthiru</title>
+<meta name="description" content="Shalini Ramachandran — Tamil Poet, Podcaster & Aspiring Director. Explore her poetry on Instagram and podcast on Spotify under ennodu inainthiru.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,7 +85,7 @@
   }
   .hero-name {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-size: clamp(2.8rem, 6vw, 5rem);
     line-height: 1.05;
     color: var(--ink);
     margin-bottom: 0.4rem;
@@ -139,11 +140,11 @@
     position: relative; overflow: hidden;
     border: 2px solid var(--gold-light);
   }
-  .hero-initial {
-    font-family: 'Playfair Display', serif;
-    font-size: 9rem; color: var(--gold);
-    opacity: 0.25; font-style: italic; line-height: 1;
-    user-select: none;
+  .hero-logo-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: inherit;
   }
   .hero-badge {
     position: absolute; bottom: -16px; right: -16px;
@@ -220,7 +221,15 @@
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem; color: var(--ink-soft); text-align: center;
     padding: 1rem; font-style: italic; line-height: 1.6;
+    position: relative;
   }
+  .insta-thumb .play-overlay {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(201,150,90,0.85); border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .insta-thumb .play-overlay svg { width: 12px; height: 12px; fill: white; margin-left: 2px; }
   .insta-card:nth-child(2) .insta-thumb { background: linear-gradient(135deg, #e8d5f5 0%, var(--rose-light) 100%); }
   .insta-card:nth-child(3) .insta-thumb { background: linear-gradient(135deg, #d5e8f5 0%, #e0f0e8 100%); }
   .insta-card:nth-child(4) .insta-thumb { background: linear-gradient(135deg, #f5f0d5 0%, var(--gold-pale) 100%); }
@@ -249,7 +258,7 @@
     background: rgba(255,255,255,0.05); border: 1px solid rgba(201,150,90,0.2);
     border-radius: 14px; padding: 1.5rem;
     transition: background 0.2s, border-color 0.2s;
-    cursor: pointer;
+    cursor: pointer; text-decoration: none; display: block;
   }
   .episode-card:hover { background: rgba(201,150,90,0.08); border-color: rgba(201,150,90,0.4); }
   .episode-num { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; font-weight: 600; }
@@ -328,10 +337,16 @@
     font-family: 'Inter', sans-serif;
   }
   .form-submit:hover { background: var(--ink); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .success-msg {
     display: none; padding: 0.8rem 1rem;
     background: #f0faf4; border: 1px solid #a8dfbb; border-radius: 8px;
     color: #1a6e3a; font-size: 0.85rem; margin-top: 0.8rem;
+  }
+  .error-msg {
+    display: none; padding: 0.8rem 1rem;
+    background: #fdf0f0; border: 1px solid #e8b4b4; border-radius: 8px;
+    color: #8b2020; font-size: 0.85rem; margin-top: 0.8rem;
   }
 
   /* FOOTER */
@@ -384,7 +399,7 @@
   <div class="hero-text">
     <div class="hero-eyebrow">Tamil Poet · Podcaster · Aspiring Director</div>
     <h1 class="hero-name">
-      Shalini
+      Shalini Ramachandran
       <em>Shalz</em>
     </h1>
     <p class="hero-subtitle">
@@ -401,7 +416,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
         Listen on Spotify
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="btn-outline">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         Follow on Instagram
       </a>
@@ -410,10 +425,10 @@
 
   <div class="hero-visual">
     <div class="hero-frame">
-      <span class="hero-initial">S</span>
+      <img src="logo.jpg" alt="Shalini Ramachandran — ennodu inainthiru" class="hero-logo-img">
     </div>
     <div class="hero-badge">
-      <div class="badge-label">Poetry & Podcast</div>
+      <div class="badge-label">Poetry &amp; Podcast</div>
       <div class="badge-value">ennodu inainthiru</div>
     </div>
     <div class="hero-badge2">
@@ -431,7 +446,7 @@
       <div class="section-label">About Shalz</div>
       <h2 class="section-title">Words that feel like home</h2>
       <p class="section-body">
-        Shalini — known by heart as <strong>Shalz</strong> — is a Tamil poet and podcaster who pours emotion into language with rare sincerity. Under the name <em>ennodu inainthiru</em> ("be with me"), she shares verses and spoken reflections that invite you to sit still with your feelings for a while.
+        Shalini Ramachandran — known by heart as <strong>Shalz</strong> — is a Tamil poet and podcaster who pours emotion into language with rare sincerity. Under the name <em>ennodu inainthiru</em> ("be with me"), she shares verses and spoken reflections that invite you to sit still with your feelings for a while.
       </p>
       <p class="section-body" style="margin-top:1rem;">
         Her work lives at the intersection of Tamil literary tradition and the intimate, unscripted texture of modern storytelling. One day, she intends to bring these stories to the screen as a director.
@@ -460,7 +475,7 @@
         <div class="dream-icon">🎬</div>
         <h3>The Dream Behind the Words</h3>
         <p>
-          Every poem Shalz writes, every episode she records, is a step toward a larger canvas — cinema. She believes that the precision of Tamil verse and the intimacy of podcasting are the best training ground for a director who wants to make audiences feel, not just watch.
+          Every poem Shalini Ramachandran writes, every episode she records, is a step toward a larger canvas — cinema. She believes that the precision of Tamil verse and the intimacy of podcasting are the best training ground for a director who wants to make audiences feel, not just watch.
         </p>
         <p style="margin-top:0.9rem;">
           The name <em>ennodu inainthiru</em> is not just a page — it's a promise: to stay with you through every medium she creates in.
@@ -472,62 +487,74 @@
 
 <div class="divider"></div>
 
-<!-- INSTAGRAM / POETRY -->
+<!-- INSTAGRAM / POETRY — all cards redirect to Instagram Reels -->
 <div class="insta-section" id="poetry">
   <div class="insta-inner">
     <div class="section-label">Tamil Poetry</div>
     <h2 class="section-title">Words on the wall</h2>
     <p class="section-body">
-      Shalini shares original Tamil poetry on Instagram under <em>ennodu inainthiru</em> — verses about longing, belonging, silence, and becoming. Each post is a tiny world you can walk into.
+      Shalini Ramachandran shares original Tamil poetry on Instagram under <em>ennodu inainthiru</em> — verses about longing, belonging, silence, and becoming. Click any card to watch her original reels &amp; posts.
     </p>
 
     <div class="insta-grid">
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">எனக்கு நீ தான் கதை<br><span style="font-size:0.75rem;opacity:0.6">You are my story</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">எனக்கு நீ தான் கதை<br><span style="font-size:0.75rem;opacity:0.6">You are my story</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">மழை போல் பேசினாய்<br><span style="font-size:0.75rem;opacity:0.6">You spoke like rain</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">மழை போல் பேசினாய்<br><span style="font-size:0.75rem;opacity:0.6">You spoke like rain</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">நிழல் போல் உடன் வா<br><span style="font-size:0.75rem;opacity:0.6">Come with me like a shadow</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">நிழல் போல் உடன் வா<br><span style="font-size:0.75rem;opacity:0.6">Come with me like a shadow</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">கண்கள் பேசும் மொழி<br><span style="font-size:0.75rem;opacity:0.6">The language eyes speak</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">கண்கள் பேசும் மொழி<br><span style="font-size:0.75rem;opacity:0.6">The language eyes speak</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">ஏங்கும் இதயம் தான்<br><span style="font-size:0.75rem;opacity:0.6">The longing heart</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">ஏங்கும் இதயம் தான்<br><span style="font-size:0.75rem;opacity:0.6">The longing heart</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="insta-card">
-        <div class="insta-thumb">உன்னோடு இணைந்திரு<br><span style="font-size:0.75rem;opacity:0.6">Be with me always</span></div>
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
+        <div class="insta-thumb">உன்னோடு இணைந்திரு<br><span style="font-size:0.75rem;opacity:0.6">Be with me always</span>
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">↗</span>
+          <span class="insta-arrow">▶ Watch Reel</span>
         </div>
       </a>
     </div>
 
     <div class="insta-cta-row">
-      <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="btn-primary" style="background:#E1306C;">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="btn-primary" style="background:#E1306C;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
         See all poems on Instagram
       </a>
@@ -536,36 +563,65 @@
   </div>
 </div>
 
-<!-- PODCAST -->
+<!-- PODCAST — episode cards link to actual Spotify episodes -->
 <div class="podcast-section" id="podcast">
   <div class="podcast-inner">
     <div class="section-label" style="color:var(--gold);">Podcast</div>
     <h2 class="section-title" style="color:var(--gold-pale);">Ennodu Inainthiru on Spotify</h2>
     <p class="section-body">
-      Shalini's podcast is where her poetry finds its voice — recorded reflections, spoken verse, and the kinds of conversations that happen only in the quiet hours.
+      Shalini Ramachandran's podcast is where her poetry finds its voice — recorded reflections, spoken verse, and the kinds of conversations that happen only in the quiet hours. Click any episode to listen directly on Spotify.
     </p>
 
     <div class="podcast-grid">
-      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="episode-card" style="text-decoration:none;">
-        <div class="episode-num">Latest Episode</div>
-        <div class="episode-title">ennodu inainthiru — New Episode</div>
-        <div class="episode-desc">Tune in to Shalz's latest spoken word and reflection. Each episode is a quiet conversation with your own feelings.</div>
+      <!-- Episode 1 — real Spotify link -->
+      <a href="https://open.spotify.com/episode/7sf4GvLVK8SnMfdhqe4Tuf" target="_blank" class="episode-card">
+        <div class="episode-num">Latest Episode · Sep 7, 2025 · 6 min</div>
+        <div class="episode-title">"Whatever happens life has to go" 💗🪄</div>
+        <div class="episode-desc">A heartfelt spoken word episode about moving forward no matter what — Shalz at her most honest and uplifting.</div>
         <div class="episode-foot">
-          <button class="play-btn" onclick="window.open('https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD','_blank'); return false;">
+          <div class="play-btn">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <span class="duration">Open in Spotify ↗</span>
+          </div>
+          <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
-      <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="episode-card" style="text-decoration:none;">
-        <div class="episode-num">All Episodes</div>
-        <div class="episode-title">Explore the full archive</div>
-        <div class="episode-desc">Every episode of ennodu inainthiru lives on Spotify — poetry read aloud, stories breathed into being, and the silences between.</div>
+
+      <!-- Episode 2 — real Spotify link -->
+      <a href="https://open.spotify.com/episode/6sVkdtUjcVK8wpFd0ftEwX" target="_blank" class="episode-card">
+        <div class="episode-num">Episode · Aug 10, 2025 · 7 min</div>
+        <div class="episode-title">LIFE IS SHORT MAKE IT SWEET 🪄🧿❤️</div>
+        <div class="episode-desc">Life is too short to hold back. Shalz serves an amazing topic to brighten your week and spread positivity.</div>
         <div class="episode-foot">
-          <button class="play-btn" onclick="window.open('https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD','_blank'); return false;">
+          <div class="play-btn">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <span class="duration">Full show ↗</span>
+          </div>
+          <span class="duration">Open on Spotify ↗</span>
+        </div>
+      </a>
+
+      <!-- Episode 3 — real Spotify link -->
+      <a href="https://open.spotify.com/episode/1lID40H0tHQetIhxBiGLUq" target="_blank" class="episode-card">
+        <div class="episode-num">Episode · Jul 28, 2025 · 7 min</div>
+        <div class="episode-title">TRY TRY TRY !!!! 🔥</div>
+        <div class="episode-desc">A super-boost topic guaranteed to energise you. Keep trying — Shalz reminds you why persistence is everything.</div>
+        <div class="episode-foot">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="duration">Open on Spotify ↗</span>
+        </div>
+      </a>
+
+      <!-- Episode 4 — real Spotify link -->
+      <a href="https://open.spotify.com/episode/0X4LyI1MDKrLkNH9Ais4cv" target="_blank" class="episode-card">
+        <div class="episode-num">Episode · Jul 13, 2025 · 7 min</div>
+        <div class="episode-title">OLD IS GOLD ❤️🪄💰</div>
+        <div class="episode-desc">A wonderful topic celebrating what endures — the things that age but never lose their shine. Don't miss this one.</div>
+        <div class="episode-foot">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
     </div>
@@ -589,7 +645,7 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-label">Get in touch</div>
-  <h2 class="section-title">Connect with Shalz</h2>
+  <h2 class="section-title">Connect with Shalini Ramachandran</h2>
 
   <div class="contact-grid">
     <div>
@@ -606,7 +662,7 @@
             <div class="contact-value">ennodu inainthiru on Spotify</div>
           </div>
         </a>
-        <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank" class="contact-row">
+        <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="contact-row">
           <div class="contact-icon ci-instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
           </div>
@@ -615,13 +671,13 @@
             <div class="contact-value">@_ennodu_inainthiru_</div>
           </div>
         </a>
-        <a href="mailto:shalzpoetry@gmail.com" class="contact-row">
+        <a href="mailto:ennoduinainthiru@gmail.com" class="contact-row">
           <div class="contact-icon ci-mail">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <div>
             <div class="contact-label">Email</div>
-            <div class="contact-value">ramachndranshalini@gmail.com</div>
+            <div class="contact-value">ennoduinainthiru@gmail.com</div>
           </div>
         </a>
       </div>
@@ -629,22 +685,27 @@
 
     <div class="contact-form">
       <h3>Send a message</h3>
-      <div class="form-group">
-        <label>Your name</label>
-        <input type="text" id="fname" placeholder="What should she call you?">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="femail" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="fmsg" rows="4" placeholder="Tell her what her work means to you, or what you'd like to create together..."></textarea>
-      </div>
-      <button class="form-submit" onclick="submitForm()">Send message →</button>
-      <div class="success-msg" id="successMsg">
-        ✓ Message sent! Shalz will get back to you soon.
-      </div>
+      <form id="contactForm" onsubmit="submitForm(event)" novalidate>
+        <div class="form-group">
+          <label for="fname">Your name</label>
+          <input type="text" id="fname" name="name" placeholder="What should she call you?" required>
+        </div>
+        <div class="form-group">
+          <label for="femail">Email</label>
+          <input type="email" id="femail" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" name="message" rows="4" placeholder="Tell her what her work means to you, or what you'd like to create together..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send message →</button>
+        <div class="success-msg" id="successMsg">
+          ✓ Message sent! Shalini Ramachandran will get back to you soon.
+        </div>
+        <div class="error-msg" id="errorMsg">
+          ✕ Could not send message. Please try emailing directly at ennoduinainthiru@gmail.com
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -658,43 +719,69 @@
     <a href="#poetry">Poetry</a>
     <a href="#podcast">Podcast</a>
     <a href="#contact">Contact</a>
-    <a href="https://www.instagram.com/_ennodu_inainthiru_?igsh=ZHlpejV1Y28zajk3" target="_blank">Instagram</a>
+    <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank">Instagram</a>
     <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank">Spotify</a>
   </div>
-  <div class="footer-copy">© 2024 Shalini · Made with love for Tamil poetry and big dreams</div>
+  <div class="footer-copy">© 2025 Shalini Ramachandran · Made with love for Tamil poetry and big dreams</div>
 </footer>
 
 <script>
-async function submitForm() {
-  const name = document.getElementById('fname').value.trim();
-  const email = document.getElementById('femail').value.trim();
-  const msg = document.getElementById('fmsg').value.trim();
+async function submitForm(event) {
+  event.preventDefault();
+
+  const name    = document.getElementById('fname').value.trim();
+  const email   = document.getElementById('femail').value.trim();
+  const msg     = document.getElementById('fmsg').value.trim();
+  const btn     = document.getElementById('submitBtn');
+  const success = document.getElementById('successMsg');
+  const errMsg  = document.getElementById('errorMsg');
+
+  // Hide previous messages
+  success.style.display = 'none';
+  errMsg.style.display  = 'none';
+
   if (!name || !email || !msg) {
     alert('Please fill in all fields before sending.');
     return;
   }
-  const btn = document.querySelector('.form-submit');
-  btn.disabled = true;
+
+  // Basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  btn.disabled    = true;
   btn.textContent = 'Sending…';
+
   try {
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message: msg })
     });
+
     if (res.ok) {
-      document.getElementById('successMsg').style.display = 'block';
-      document.getElementById('fname').value = '';
+      success.style.display = 'block';
+      document.getElementById('fname').value  = '';
       document.getElementById('femail').value = '';
-      document.getElementById('fmsg').value = '';
+      document.getElementById('fmsg').value   = '';
     } else {
-      const d = await res.json();
-      alert('Could not send: ' + (d.error || 'unknown error'));
+      let errDetail = '';
+      try {
+        const d = await res.json();
+        errDetail = d.error || '';
+      } catch (_) {}
+      errMsg.style.display = 'block';
+      if (errDetail) console.error('Server error:', errDetail);
     }
   } catch (e) {
-    alert('Network error. Please try again.');
+    console.error('Network error:', e);
+    errMsg.style.display = 'block';
   }
-  btn.disabled = false;
+
+  btn.disabled    = false;
   btn.textContent = 'Send message →';
 }
 </script>

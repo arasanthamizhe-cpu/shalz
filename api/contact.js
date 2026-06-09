@@ -9,6 +9,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  // Basic email format check
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
+
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   if (!RESEND_API_KEY) {
     return res.status(500).json({ error: 'Email service not configured' });
@@ -16,7 +22,7 @@ export default async function handler(req, res) {
 
   const htmlBody = `
     <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;padding:32px;background:#fdf6ee;border-radius:12px;color:#1a1008;">
-      <h2 style="font-size:1.4rem;color:#c9965a;margin-bottom:4px;">New message for Shalz ✦</h2>
+      <h2 style="font-size:1.4rem;color:#c9965a;margin-bottom:4px;">New message for Shalini Ramachandran ✦</h2>
       <p style="font-size:0.8rem;color:#8a7a6a;margin-bottom:24px;border-bottom:1px solid rgba(201,150,90,0.2);padding-bottom:16px;">
         via <strong>ennodu inainthiru</strong> website
       </p>
@@ -49,7 +55,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Shalz Website <onboarding@resend.dev>',
-        to: ['ramachndranshalini@gmail.com'],
+        to: ['ennoduinainthiru@gmail.com'],
         reply_to: email,
         subject: `✦ New message from ${name} — ennodu inainthiru`,
         html: htmlBody,
