@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shalini Ramachandran — Ennodu Inainthiru</title>
 <meta name="description" content="Shalini Ramachandran — Tamil Poet, Podcaster & Aspiring Director. Explore her poetry on Instagram and podcast on Spotify under ennodu inainthiru.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #1a1008;
-    --ink-soft: #4a3d2e;
-    --ink-muted: #8a7a6a;
-    --gold: #c9965a;
-    --gold-light: #e8c99a;
-    --gold-pale: #f7edd8;
-    --rose: #c97a8a;
-    --rose-light: #f2d5db;
-    --cream: #fdf6ee;
-    --white: #ffffff;
-    --border: rgba(201,150,90,0.2);
-    --border-soft: rgba(201,150,90,0.12);
+    --ink: #fcfaf5;
+    --ink-soft: #d0c8ba;
+    --ink-muted: #968f84;
+    --gold: #dfb271;
+    --gold-light: #f1d5a7;
+    --gold-pale: #fff6e5;
+    --rose: #df8a9b;
+    --rose-light: #f8e1e6;
+    --cream: #080605;
+    --white: #140f0c;
+    --border: rgba(223,178,113,0.3);
+    --border-soft: rgba(223,178,113,0.15);
   }
 
   html { scroll-behavior: smooth; }
@@ -32,136 +32,300 @@
     color: var(--ink);
     overflow-x: hidden;
     line-height: 1.7;
+    position: relative;
   }
 
-  /* NAV */
+  /* ── GLOBAL CINEMATIC BACKGROUND ── */
+  .cinematic-bg {
+    position: fixed; inset: 0; z-index: -2;
+    background: var(--cream);
+    overflow: hidden; pointer-events: none;
+  }
+  .film-grain {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.8;
+  }
+  .bg-orb {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(100px); opacity: 0.4;
+    animation: globalFloat 15s ease-in-out infinite alternate;
+  }
+  .bg-orb-1 {
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(223,178,113,0.3) 0%, transparent 60%);
+    top: -10%; left: -10%;
+  }
+  .bg-orb-2 {
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(223,138,155,0.25) 0%, transparent 60%);
+    bottom: -10%; right: -10%;
+    animation-delay: -5s;
+  }
+  .bg-orb-3 {
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    top: 40%; left: 60%;
+    animation-delay: -10s;
+  }
+  @keyframes globalFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10vw, 5vh) scale(1.2); }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px) scale(0.96);
+    filter: blur(4px);
+    transition: opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.98);
+    transition: opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(50px) scale(0.98);
+    transition: opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+  .delay-5 { transition-delay: 0.5s; }
+
+  /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1rem 2.5rem;
-    background: rgba(253,246,238,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(137, 5, 244, 0.92);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-soft);
+    transition: box-shadow 0.3s;
   }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem; color: var(--ink);
     letter-spacing: 0.02em; text-decoration: none;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .nav-logo img {
+    width: 34px; height: 34px; border-radius: 50%;
+    object-fit: cover; border: 1.5px solid var(--gold);
   }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--ink-soft); text-decoration: none; font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.25s;
   }
   .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
 
-  /* HERO */
+  /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: grid; grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding: 6rem 2.5rem 4rem;
+    padding: 7rem 2.5rem 4rem;
     gap: 4rem;
     position: relative;
     overflow: hidden;
   }
-  .hero::before {
-    content: '';
-    position: absolute; top: -20%; right: -10%;
-    width: 60vw; height: 80vh;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(201,150,90,0.08) 0%, transparent 70%);
-    pointer-events: none;
+  /* Floating gradient orbs */
+  .hero-orb {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(90px); opacity: 0.45;
+    animation: floatOrb 10s ease-in-out infinite alternate;
   }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(223,178,113,0.5) 0%, transparent 70%);
+    top: -15%; right: -10%;
+    animation-delay: 0s;
+  }
+  .hero-orb-2 {
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, rgba(223,138,155,0.4) 0%, transparent 70%);
+    bottom: 5%; left: -10%;
+    animation-delay: 3s;
+  }
+  @keyframes floatOrb {
+    0% { transform: translateY(0px) scale(1); opacity: 0.35; }
+    100% { transform: translateY(-40px) scale(1.1); opacity: 0.6; }
+  }
+
+  /* Floating particles */
+  .particles {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: -1;
+  }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(223,178,113,0.8) 0%, rgba(223,138,155,0) 70%);
+    box-shadow: 0 0 10px rgba(223,178,113,0.5);
+    animation: floatParticle linear infinite;
+  }
+  @keyframes floatParticle {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+  }
+
   .hero-text { position: relative; z-index: 1; }
   .hero-eyebrow {
     font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--gold); font-weight: 600; margin-bottom: 1.2rem;
     display: flex; align-items: center; gap: 0.8rem;
+    animation: slideDown 0.8s ease forwards;
   }
   .hero-eyebrow::before {
     content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
   }
   .hero-name {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    line-height: 1.05;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
+    font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+    line-height: 1.05; color: var(--ink); margin-bottom: 0.4rem;
+    animation: slideUp 0.9s ease 0.2s both;
+    text-shadow: 0 4px 20px rgba(223,178,113,0.2);
   }
   .hero-name em {
-    font-style: italic; color: var(--gold); display: block;
+    font-style: italic;
+    background: linear-gradient(to right, var(--gold), var(--rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    animation: shimmer 4s infinite linear;
+    background-size: 200% auto;
+  }
+  @keyframes shimmer {
+    to { background-position: 200% center; }
   }
   .hero-subtitle {
     font-size: 1rem; color: var(--ink-soft);
-    margin: 1.2rem 0 2rem;
-    max-width: 420px; line-height: 1.8;
+    margin: 1.2rem 0 2rem; max-width: 420px; line-height: 1.9;
+    animation: slideUp 0.9s ease 0.4s both;
   }
   .hero-tags {
     display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem;
+    animation: slideUp 0.9s ease 0.55s both;
   }
   .tag {
     padding: 0.35rem 0.9rem;
-    border: 1px solid var(--border);
-    border-radius: 100px;
+    border: 1px solid var(--border); border-radius: 100px;
     font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.04em;
     background: var(--white);
+    transition: all 0.2s;
   }
-  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    padding: 0.8rem 1.8rem;
-    background: var(--gold);
-    color: var(--white); border: none; border-radius: 6px;
-    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em;
-    cursor: pointer; text-decoration: none; transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
+  .tag:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: slideUp 0.9s ease 0.7s both;
   }
-  .btn-primary:hover { background: var(--ink); transform: translateY(-1px); }
-  .btn-outline {
-    padding: 0.8rem 1.8rem;
-    background: transparent;
-    color: var(--ink); border: 1px solid var(--border);
-    border-radius: 6px; font-size: 0.85rem; font-weight: 500;
-    cursor: pointer; text-decoration: none; transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* Hero visual side */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(135deg, var(--gold), #b88645);
+    color: var(--white);
+    border: none; border-radius: 30px;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em;
+    cursor: pointer; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    box-shadow: 0 4px 15px rgba(201,150,90,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--ink), #2a1f18);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .btn-outline {
+    padding: 0.9rem 2.2rem; background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    color: var(--ink); border: 1.5px solid var(--gold);
+    border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex; align-items: center; gap: 0.6rem;
+  }
+  .btn-outline:hover {
+    background: var(--gold); color: var(--white);
+    transform: translateY(-3px); box-shadow: 0 12px 24px rgba(201,150,90,0.3);
+  }
+
+  /* Hero visual */
   .hero-visual {
     position: relative; display: flex; justify-content: center; align-items: center;
+    animation: slideUp 1s ease 0.3s both;
   }
   .hero-frame {
-    width: 340px; height: 420px;
-    border-radius: 180px 180px 120px 120px;
-    background: linear-gradient(160deg, var(--gold-pale) 0%, var(--rose-light) 100%);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    border: 2px solid var(--gold-light);
+    width: 360px; height: 460px;
+    border-radius: 200px 200px 140px 140px;
+    overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.6);
+    box-shadow: 0 30px 80px rgba(201,150,90,0.25), 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    animation: heroFloat 6s ease-in-out infinite;
+  }
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
   }
   .hero-logo-img {
     width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: inherit;
+    object-fit: cover; object-position: center top;
   }
   .hero-badge {
-    position: absolute; bottom: -16px; right: -16px;
+    position: absolute; bottom: -16px; right: -20px;
     background: var(--white); border: 1px solid var(--border);
-    border-radius: 12px; padding: 0.9rem 1.2rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    border-radius: 14px; padding: 0.9rem 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    animation: badgePop 0.6s ease 1s both;
   }
-  .badge-label { font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
-  .badge-value { font-size: 1.1rem; font-weight: 600; color: var(--ink); }
   .hero-badge2 {
-    position: absolute; top: 20px; left: -20px;
-    background: var(--gold); border-radius: 10px; padding: 0.7rem 1rem;
-    box-shadow: 0 4px 16px rgba(201,150,90,0.3);
+    position: absolute; top: 20px; left: -24px;
+    background: var(--gold); border-radius: 12px; padding: 0.7rem 1rem;
+    box-shadow: 0 4px 20px rgba(201,150,90,0.4);
+    animation: badgePop 0.6s ease 1.2s both;
   }
+  @keyframes badgePop {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .badge-label { font-size: 0.68rem; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .badge-value { font-size: 1rem; font-weight: 700; color: var(--ink); }
   .badge2-text { font-size: 0.75rem; color: var(--white); font-weight: 600; }
 
-  /* SECTION BASE */
+  /* ── SECTIONS ── */
   section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
   .section-label {
     font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -179,102 +343,232 @@
   .section-body {
     font-size: 1rem; color: var(--ink-soft); max-width: 560px; line-height: 1.85;
   }
-  .divider { width: 100%; height: 1px; background: var(--border-soft); margin: 0; }
+  .divider { width: 100%; height: 1px; background: var(--border-soft); }
 
-  /* ABOUT */
+  /* ── ABOUT ── */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
   .stat-card {
-    background: var(--white); border: 1px solid var(--border-soft);
-    border-radius: 12px; padding: 1.2rem 1.4rem;
+    background: rgba(30, 22, 17, 0.6); backdrop-filter: blur(16px);
+    border: 1px solid rgba(223, 178, 113, 0.15);
+    border-radius: 16px; padding: 1.6rem;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+    cursor: default;
+  }
+  .stat-card:hover {
+    background: rgba(40, 30, 24, 0.8);
+    border-color: rgba(223, 178, 113, 0.4);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(223,178,113,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .stat-num {
     font-family: 'Playfair Display', serif;
     font-size: 2rem; color: var(--gold); font-weight: 700; line-height: 1;
   }
-  .stat-desc { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.3rem; letter-spacing: 0.04em; }
+  .stat-desc { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.4rem; letter-spacing: 0.04em; }
   .dream-card {
-    background: var(--ink); border-radius: 16px; padding: 2rem;
-    color: var(--gold-pale);
+    background: rgba(30, 22, 17, 0.4); backdrop-filter: blur(20px);
+    border: 1px solid rgba(223, 178, 113, 0.2);
+    border-radius: 20px; padding: 2.4rem;
+    color: var(--ink);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    position: relative; overflow: hidden;
+    transition: all 0.5s ease;
+  }
+  .dream-card:hover {
+    box-shadow: 0 30px 70px rgba(223,178,113,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-5px);
+  }
+  .dream-card::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(223,178,113,0.2) 0%, transparent 70%);
   }
   .dream-card h3 {
-    font-family: 'Playfair Display', serif; font-size: 1.4rem;
-    color: var(--gold-light); margin-bottom: 0.8rem;
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    color: var(--gold); margin-bottom: 1rem; position: relative;
   }
-  .dream-card p { font-size: 0.9rem; color: rgba(247,237,216,0.75); line-height: 1.8; }
-  .dream-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .dream-card p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.9; position: relative; }
+  .dream-icon { font-size: 2.2rem; margin-bottom: 1rem; animation: floatIcon 3s ease-in-out infinite alternate; }
+  @keyframes floatIcon {
+    from { transform: translateY(0); }
+    to { transform: translateY(-6px); }
+  }
 
-  /* POETRY / INSTAGRAM */
+  /* ── INSTAGRAM SECTION ── */
   .insta-section { background: var(--white); padding: 6rem 0; }
   .insta-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
-  .insta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
-  .insta-card {
-    border-radius: 14px; overflow: hidden; border: 1px solid var(--border-soft);
-    transition: transform 0.25s, box-shadow 0.25s;
-    text-decoration: none; display: block;
+
+  /* Instagram embed grid */
+  .insta-embed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 2.5rem;
   }
-  .insta-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+
+  .insta-embed-wrapper {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(223, 178, 113, 0.2);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--white);
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .insta-embed-wrapper::after {
+    content: ''; position: absolute; inset: 0; border-radius: 14px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); pointer-events: none;
+  }
+  .insta-embed-wrapper:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(223,178,113,0.15);
+    border-color: rgba(223, 178, 113, 0.5);
+  }
+  .insta-embed-wrapper iframe,
+  .insta-embed-wrapper .instagram-media {
+    flex: 1;
+  }
+
+  /* Fallback cards for when embeds don't load */
+  .insta-fallback-card {
+    border-radius: 14px; overflow: hidden; border: 1px solid var(--border-soft);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none; display: block;
+    background: var(--cream);
+  }
+  .insta-fallback-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  }
   .insta-thumb {
     aspect-ratio: 1/1;
     background: linear-gradient(135deg, var(--gold-pale) 0%, var(--rose-light) 100%);
-    display: flex; align-items: center; justify-content: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem; color: var(--ink-soft); text-align: center;
-    padding: 1rem; font-style: italic; line-height: 1.6;
+    font-size: 1rem; color: var(--ink-soft); text-align: center;
+    padding: 1.5rem; font-style: italic; line-height: 1.7;
     position: relative;
   }
-  .insta-thumb .play-overlay {
-    position: absolute; bottom: 8px; right: 8px;
-    background: rgba(201,150,90,0.85); border-radius: 50%;
-    width: 32px; height: 32px;
+  .insta-thumb .reel-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+    border-radius: 8px; padding: 3px 8px;
+    font-size: 0.65rem; color: white; font-weight: 700;
+    font-family: 'Inter', sans-serif; font-style: normal; letter-spacing: 0.05em;
+  }
+  .insta-thumb .play-circle {
+    margin-top: 1rem;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, #ee2a7b, #6228d7);
     display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(238,42,123,0.35);
+    transition: transform 0.2s;
   }
-  .insta-thumb .play-overlay svg { width: 12px; height: 12px; fill: white; margin-left: 2px; }
-  .insta-card:nth-child(2) .insta-thumb { background: linear-gradient(135deg, #e8d5f5 0%, var(--rose-light) 100%); }
-  .insta-card:nth-child(3) .insta-thumb { background: linear-gradient(135deg, #d5e8f5 0%, #e0f0e8 100%); }
-  .insta-card:nth-child(4) .insta-thumb { background: linear-gradient(135deg, #f5f0d5 0%, var(--gold-pale) 100%); }
-  .insta-card:nth-child(5) .insta-thumb { background: linear-gradient(135deg, var(--rose-light) 0%, #f5e0d5 100%); }
-  .insta-card:nth-child(6) .insta-thumb { background: linear-gradient(135deg, #e0f5ec 0%, #d5eef5 100%); }
+  .insta-fallback-card:hover .play-circle { transform: scale(1.15); }
+  .play-circle svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
   .insta-meta {
-    padding: 0.9rem 1rem;
+    padding: 0.9rem 1.1rem;
     display: flex; align-items: center; justify-content: space-between;
-    background: var(--white);
+    background: var(--white); border-top: 1px solid var(--border-soft);
   }
-  .insta-handle { font-size: 0.75rem; color: var(--ink-muted); }
-  .insta-arrow { font-size: 0.75rem; color: var(--gold); }
+  .insta-handle { font-size: 0.74rem; color: var(--ink-muted); }
+  .insta-arrow {
+    font-size: 0.72rem; color: #ee2a7b; font-weight: 600;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
   .insta-cta-row {
     display: flex; gap: 1rem; align-items: center; margin-top: 2.5rem; flex-wrap: wrap;
   }
 
-  /* PODCAST */
-  .podcast-section { background: var(--ink); padding: 6rem 0; }
-  .podcast-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
-  .podcast-inner .section-label { color: var(--gold-light); }
-  .podcast-inner .section-label::after { background: var(--gold-light); }
-  .podcast-inner .section-title { color: var(--gold-pale); }
-  .podcast-inner .section-body { color: rgba(247,237,216,0.65); }
+  /* Profile banner */
+  .insta-profile-banner {
+    display: flex; align-items: center; gap: 1.5rem;
+    background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+    border-radius: 16px; padding: 1.5rem 2rem;
+    margin-bottom: 2rem; text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .insta-profile-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(238,42,123,0.3);
+  }
+  .insta-profile-banner img {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 3px solid white; object-fit: cover;
+    flex-shrink: 0;
+  }
+  .insta-profile-info { flex: 1; }
+  .insta-profile-name {
+    font-size: 1.1rem; font-weight: 700; color: white;
+    font-family: 'Playfair Display', serif;
+  }
+  .insta-profile-sub { font-size: 0.82rem; color: rgba(255,255,255,0.85); margin-top: 0.2rem; }
+  .insta-profile-btn {
+    background: white; color: #ee2a7b;
+    border: none; border-radius: 100px;
+    padding: 0.6rem 1.4rem; font-size: 0.82rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; white-space: nowrap;
+  }
+  .insta-profile-btn:hover { background: rgba(255,255,255,0.9); transform: scale(1.03); }
+
+  /* ── PODCAST ── */
+  .podcast-section { background: rgba(0,0,0,0.2); padding: 6rem 0; position: relative; }
+  .podcast-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, var(--cream) 100%);
+    pointer-events: none;
+  }
+  .podcast-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 1; }
+  .podcast-inner .section-label { color: var(--gold); }
+  .podcast-inner .section-label::after { background: var(--gold); }
+  .podcast-inner .section-title { color: var(--ink); }
+  .podcast-inner .section-body { color: var(--ink-soft); }
   .podcast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
   .episode-card {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(201,150,90,0.2);
-    border-radius: 14px; padding: 1.5rem;
-    transition: background 0.2s, border-color 0.2s;
-    cursor: pointer; text-decoration: none; display: block;
+    background: rgba(30, 22, 17, 0.6); backdrop-filter: blur(16px);
+    border: 1px solid rgba(223, 178, 113, 0.15);
+    border-radius: 20px; padding: 1.8rem;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; display: block;
+    position: relative; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
   }
-  .episode-card:hover { background: rgba(201,150,90,0.08); border-color: rgba(201,150,90,0.4); }
-  .episode-num { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; font-weight: 600; }
-  .episode-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--gold-pale); margin-bottom: 0.5rem; line-height: 1.35; }
-  .episode-desc { font-size: 0.82rem; color: rgba(247,237,216,0.5); line-height: 1.7; }
-  .episode-foot {
-    display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;
+  .episode-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), #f3a183);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .episode-card:hover { 
+    background: rgba(40, 30, 24, 0.8); border-color: rgba(223, 178, 113, 0.4);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 24px 60px rgba(223,178,113,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .episode-card:hover::before { transform: scaleX(1); }
+  .episode-num { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.7rem; font-weight: 600; }
+  .episode-title { font-family: 'Playfair Display', serif; font-size: 1.08rem; color: var(--gold-pale); margin-bottom: 0.6rem; line-height: 1.4; }
+  .episode-desc { font-size: 0.82rem; color: rgba(247,237,216,0.5); line-height: 1.75; }
+  .episode-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 1.2rem; }
   .play-btn {
-    width: 36px; height: 36px; border-radius: 50%;
+    width: 38px; height: 38px; border-radius: 50%;
     background: var(--gold); border: none;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: transform 0.15s;
+    cursor: pointer; transition: all 0.2s;
     color: var(--white);
+    box-shadow: 0 4px 12px rgba(201,150,90,0.4);
   }
-  .play-btn:hover { transform: scale(1.08); }
+  .episode-card:hover .play-btn {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(201,150,90,0.5);
+  }
   .play-btn svg { width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
   .duration { font-size: 0.75rem; color: rgba(247,237,216,0.4); }
   .spotify-embed-row { margin-top: 2.5rem; }
@@ -282,25 +576,40 @@
     display: inline-flex; align-items: center; gap: 0.7rem;
     background: #1DB954; color: var(--white);
     padding: 0.85rem 2rem; border-radius: 100px;
-    font-size: 0.88rem; font-weight: 600;
-    text-decoration: none; transition: opacity 0.2s;
+    font-size: 0.88rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(29,185,84,0.35);
   }
-  .spotify-btn:hover { opacity: 0.88; }
+  .spotify-btn:hover {
+    opacity: 0.92; transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(29,185,84,0.45);
+  }
   .spotify-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-  /* CONTACT */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; }
-  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
-  .contact-row {
-    display: flex; align-items: center; gap: 1rem;
-    padding: 1rem 1.2rem;
-    background: var(--white); border: 1px solid var(--border-soft);
-    border-radius: 10px; text-decoration: none;
-    transition: border-color 0.2s, transform 0.15s;
+  /* ── CONTACT ── */
+  .contact-section-wrap {
+    background: linear-gradient(160deg, rgba(0,0,0,0.3) 0%, rgba(20,15,12,0.5) 100%);
+    padding: 6rem 0;
   }
-  .contact-row:hover { border-color: var(--gold); transform: translateX(4px); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2.5rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-row {
+    display: flex; align-items: center; gap: 1.1rem;
+    padding: 1rem 1.2rem;
+    background: rgba(30, 22, 17, 0.6); backdrop-filter: blur(12px);
+    border: 1px solid rgba(223, 178, 113, 0.15);
+    border-radius: 12px; text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+  .contact-row:hover {
+    border-color: rgba(223, 178, 113, 0.4); transform: translateX(8px);
+    background: rgba(40, 30, 24, 0.8);
+    box-shadow: 0 12px 30px rgba(223,178,113,0.15);
+  }
   .contact-icon {
-    width: 40px; height: 40px; border-radius: 10px;
+    width: 42px; height: 42px; border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
@@ -309,83 +618,150 @@
   .ci-mail { background: var(--gold-pale); }
   .contact-icon svg { width: 20px; height: 20px; fill: white; }
   .ci-mail svg { fill: var(--gold); }
-  .contact-label { font-size: 0.72rem; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.1rem; }
-  .contact-value { font-size: 0.92rem; color: var(--ink); font-weight: 500; }
+  .contact-label { font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .contact-value { font-size: 0.9rem; color: var(--ink); font-weight: 600; margin-top: 0.1rem; }
+
+  /* Form */
   .contact-form {
-    background: var(--white); border: 1px solid var(--border-soft);
-    border-radius: 16px; padding: 2rem;
+    background: rgba(30, 22, 17, 0.6); backdrop-filter: blur(16px);
+    border: 1px solid rgba(223, 178, 113, 0.15);
+    border-radius: 20px; padding: 2.2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
   }
   .contact-form h3 {
-    font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 1.2rem;
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    color: var(--ink); margin-bottom: 1.4rem;
   }
-  .form-group { margin-bottom: 1rem; }
-  .form-group label { font-size: 0.78rem; color: var(--ink-muted); letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem; text-transform: uppercase; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label {
+    font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.06em;
+    display: block; margin-bottom: 0.45rem; text-transform: uppercase; font-weight: 500;
+  }
   .form-group input, .form-group textarea {
-    width: 100%; padding: 0.7rem 0.9rem;
-    border: 1px solid var(--border); border-radius: 8px;
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(223, 178, 113, 0.2); border-radius: 10px;
     font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--ink);
-    background: var(--cream); outline: none; transition: border-color 0.2s;
+    background: rgba(0,0,0,0.2); outline: none; transition: all 0.3s;
     resize: vertical;
   }
-  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
-  .form-submit {
-    width: 100%; padding: 0.85rem;
-    background: var(--gold); color: var(--white);
-    border: none; border-radius: 8px;
-    font-size: 0.88rem; font-weight: 600; letter-spacing: 0.04em;
-    cursor: pointer; transition: background 0.2s;
-    font-family: 'Inter', sans-serif;
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(0,0,0,0.4);
+    box-shadow: 0 0 0 3px rgba(223,178,113,0.15);
   }
-  .form-submit:hover { background: var(--ink); }
-  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-submit {
+    width: 100%; padding: 0.9rem;
+    background: linear-gradient(135deg, var(--gold), #b88645); color: #110d0b;
+    border: none; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em;
+    cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 16px rgba(223,178,113,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+    position: relative; overflow: hidden;
+  }
+  .form-submit::after {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    transform: scale(0.5);
+  }
+  .form-submit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(223,178,113,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+  .form-submit:hover::after { opacity: 1; transform: scale(1); transition: transform 0.6s ease-out, opacity 0.3s; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
   .success-msg {
-    display: none; padding: 0.8rem 1rem;
-    background: #f0faf4; border: 1px solid #a8dfbb; border-radius: 8px;
-    color: #1a6e3a; font-size: 0.85rem; margin-top: 0.8rem;
+    display: none; padding: 1rem 1.2rem;
+    background: #f0faf4; border: 1px solid #a8dfbb; border-radius: 10px;
+    color: #1a6e3a; font-size: 0.85rem; margin-top: 0.9rem;
+    animation: fadeInUp 0.4s ease;
   }
   .error-msg {
-    display: none; padding: 0.8rem 1rem;
-    background: #fdf0f0; border: 1px solid #e8b4b4; border-radius: 8px;
-    color: #8b2020; font-size: 0.85rem; margin-top: 0.8rem;
+    display: none; padding: 1rem 1.2rem;
+    background: #fdf0f0; border: 1px solid #e8b4b4; border-radius: 10px;
+    color: #8b2020; font-size: 0.85rem; margin-top: 0.9rem;
+    animation: fadeInUp 0.4s ease;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* FOOTER */
+  /* Sending spinner */
+  .spinner {
+    display: inline-block; width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white; border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
   footer {
-    background: var(--ink); padding: 3rem 2.5rem;
-    text-align: center;
+    background: rgba(0,0,0,0.5); padding: 4rem 2.5rem;
+    text-align: center; position: relative; overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  footer::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(223,178,113,0.5), transparent);
   }
   .footer-logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; color: var(--gold-pale);
+    font-size: 1.8rem; color: var(--gold-pale);
     font-style: italic; margin-bottom: 0.5rem;
   }
-  .footer-tagline { font-size: 0.8rem; color: rgba(247,237,216,0.4); margin-bottom: 1.5rem; letter-spacing: 0.08em; }
-  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
-  .footer-links a { font-size: 0.78rem; color: rgba(247,237,216,0.5); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-copy { font-size: 0.72rem; color: rgba(247,237,216,0.25); }
+  .footer-tagline { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 1.8rem; letter-spacing: 0.1em; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .footer-links a {
+    font-size: 0.78rem; color: var(--ink-soft); text-decoration: none;
+    letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.3s, transform 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); transform: translateY(-2px); }
+  .footer-copy { font-size: 0.72rem; color: var(--ink-muted); opacity: 0.7; }
 
-  /* MOBILE */
+  /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 3rem; gap: 2rem; }
     .hero-visual { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .insta-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .insta-embed-grid { grid-template-columns: repeat(2, 1fr); }
     .podcast-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     section { padding: 4rem 1.5rem; }
-    .podcast-inner, .insta-inner { padding: 0 1.5rem; }
+    .podcast-inner, .insta-inner, .contact-inner { padding: 0 1.5rem; }
     .podcast-section, .insta-section { padding: 4rem 0; }
+    .contact-section-wrap { padding: 4rem 0; }
+    .insta-embed-grid { grid-template-columns: 1fr; }
+    .insta-profile-banner { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
 
+<!-- Global Cinematic Background -->
+<div class="cinematic-bg">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+</div>
+<div class="film-grain"></div>
+
+<!-- Floating Particles -->
+<div class="particles" id="particles"></div>
+
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Shalz</a>
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="logo.jpg" alt="Shalz">
+    Shalz
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#poetry">Poetry</a></li>
@@ -396,6 +772,10 @@
 
 <!-- HERO -->
 <section class="hero" id="home" style="max-width:100%; padding-top:7rem;">
+  <!-- Orbs -->
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
   <div class="hero-text">
     <div class="hero-eyebrow">Tamil Poet · Podcaster · Aspiring Director</div>
     <h1 class="hero-name">
@@ -416,7 +796,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
         Listen on Spotify
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="btn-outline">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         Follow on Instagram
       </a>
@@ -443,34 +823,22 @@
 <section id="about">
   <div class="about-grid">
     <div>
-      <div class="section-label">About Shalz</div>
-      <h2 class="section-title">Words that feel like home</h2>
-      <p class="section-body">
+      <div class="section-label reveal">About Shalz</div>
+      <h2 class="section-title reveal delay-1">Words that feel like home</h2>
+      <p class="section-body reveal delay-2">
         Shalini Ramachandran — known by heart as <strong>Shalz</strong> — is a Tamil poet and podcaster who pours emotion into language with rare sincerity. Under the name <em>ennodu inainthiru</em> ("be with me"), she shares verses and spoken reflections that invite you to sit still with your feelings for a while.
       </p>
-      <p class="section-body" style="margin-top:1rem;">
+      <p class="section-body reveal delay-3" style="margin-top:1rem;">
         Her work lives at the intersection of Tamil literary tradition and the intimate, unscripted texture of modern storytelling. One day, she intends to bring these stories to the screen as a director.
       </p>
       <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">✦</div>
-          <div class="stat-desc">Tamil poetry on Instagram</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">🎙</div>
-          <div class="stat-desc">Podcast on Spotify</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">🎬</div>
-          <div class="stat-desc">Aspiring film director</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">💫</div>
-          <div class="stat-desc">Stories told with soul</div>
-        </div>
+        <div class="stat-card reveal delay-1"><div class="stat-num">✦</div><div class="stat-desc">Tamil poetry on Instagram</div></div>
+        <div class="stat-card reveal delay-2"><div class="stat-num">🎙</div><div class="stat-desc">Podcast on Spotify</div></div>
+        <div class="stat-card reveal delay-3"><div class="stat-num">🎬</div><div class="stat-desc">Aspiring film director</div></div>
+        <div class="stat-card reveal delay-4"><div class="stat-num">💫</div><div class="stat-desc">Stories told with soul</div></div>
       </div>
     </div>
-    <div>
+    <div class="reveal-right">
       <div class="dream-card">
         <div class="dream-icon">🎬</div>
         <h3>The Dream Behind the Words</h3>
@@ -487,146 +855,166 @@
 
 <div class="divider"></div>
 
-<!-- INSTAGRAM / POETRY — all cards redirect to Instagram Reels -->
+<!-- INSTAGRAM / POETRY — Instagram official embeds -->
 <div class="insta-section" id="poetry">
   <div class="insta-inner">
-    <div class="section-label">Tamil Poetry</div>
-    <h2 class="section-title">Words on the wall</h2>
-    <p class="section-body">
-      Shalini Ramachandran shares original Tamil poetry on Instagram under <em>ennodu inainthiru</em> — verses about longing, belonging, silence, and becoming. Click any card to watch her original reels &amp; posts.
+    <div class="section-label reveal">Tamil Poetry &amp; Reels</div>
+    <h2 class="section-title reveal delay-1">Words on the wall</h2>
+    <p class="section-body reveal delay-2">
+      Shalini Ramachandran shares original Tamil poetry and reels on Instagram under <em>ennodu inainthiru</em>. Click any reel below to watch her original videos directly on Instagram.
     </p>
 
-    <div class="insta-grid">
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">எனக்கு நீ தான் கதை<br><span style="font-size:0.75rem;opacity:0.6">You are my story</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <!-- Profile Banner -->
+    <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="insta-profile-banner reveal delay-3">
+      <img src="logo.jpg" alt="ennodu inainthiru">
+      <div class="insta-profile-info">
+        <div class="insta-profile-name">ennodu inainthiru ❤</div>
+        <div class="insta-profile-sub">@_ennodu_inainthiru_ · Tamil Poetry &amp; Reels by Shalini Ramachandran</div>
+      </div>
+      <span class="insta-profile-btn">View Profile ↗</span>
+    </a>
+
+    <div class="insta-embed-grid">
+
+      <!-- Reel 1 -->
+      <a href="https://www.instagram.com/reel/DMdNHlESvcm/" target="_blank" class="insta-fallback-card reveal delay-1">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-1.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">யாருமில்லாத மொட்டை மாடி</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">மழை போல் பேசினாய்<br><span style="font-size:0.75rem;opacity:0.6">You spoke like rain</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+
+      <!-- Reel 2 -->
+      <a href="https://www.instagram.com/reel/DD_c-DLyyB1/" target="_blank" class="insta-fallback-card reveal delay-2">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-2.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">மழை போல் பேசினாய்</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">நிழல் போல் உடன் வா<br><span style="font-size:0.75rem;opacity:0.6">Come with me like a shadow</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+
+      <!-- Reel 3 -->
+      <a href="https://www.instagram.com/reel/DKuOjBNyT0g/" target="_blank" class="insta-fallback-card reveal delay-3">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-3.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">யாரும் தெரியாமல்</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">கண்கள் பேசும் மொழி<br><span style="font-size:0.75rem;opacity:0.6">The language eyes speak</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+
+      <!-- Reel 4 -->
+      <a href="https://www.instagram.com/reel/DZfiHNxTZ4u/" target="_blank" class="insta-fallback-card reveal delay-1">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-4.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">உன் மீது நான் கொண்ட காதல்</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">ஏங்கும் இதயம் தான்<br><span style="font-size:0.75rem;opacity:0.6">The longing heart</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+
+      <!-- Reel 5 -->
+      <a href="https://www.instagram.com/reel/DZVQ7RWTiVV/" target="_blank" class="insta-fallback-card reveal delay-2">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-5.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">எல்லாம் கொஞ்ச காலம் தான்</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/reels/" target="_blank" class="insta-card">
-        <div class="insta-thumb">உன்னோடு இணைந்திரு<br><span style="font-size:0.75rem;opacity:0.6">Be with me always</span>
-          <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+
+      <!-- Reel 6 -->
+      <a href="https://www.instagram.com/reel/DZDUZoszjVz/" target="_blank" class="insta-fallback-card reveal delay-3">
+        <div class="insta-thumb" style="background: linear-gradient(to top, rgba(20,15,12,0.9) 0%, rgba(20,15,12,0.2) 100%), url('images/reel-6.png') center/cover; color: var(--white);">
+          <div class="reel-badge">▶ REEL</div>
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div style="margin-top: 1.5rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">உன்னோடு இணைந்திரு</div>
         </div>
         <div class="insta-meta">
           <span class="insta-handle">@_ennodu_inainthiru_</span>
-          <span class="insta-arrow">▶ Watch Reel</span>
+          <span class="insta-arrow">Watch ↗</span>
         </div>
       </a>
+
     </div>
 
-    <div class="insta-cta-row">
-      <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="btn-primary" style="background:#E1306C;">
+    <div class="insta-cta-row reveal">
+      <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#ee2a7b,#6228d7); border:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
-        See all poems on Instagram
+        View all reels on Instagram
       </a>
       <span style="font-size:0.82rem; color:var(--ink-muted);">Follow <strong>@_ennodu_inainthiru_</strong> for new verses</span>
     </div>
   </div>
 </div>
 
-<!-- PODCAST — episode cards link to actual Spotify episodes -->
+<!-- PODCAST -->
 <div class="podcast-section" id="podcast">
   <div class="podcast-inner">
-    <div class="section-label" style="color:var(--gold);">Podcast</div>
-    <h2 class="section-title" style="color:var(--gold-pale);">Ennodu Inainthiru on Spotify</h2>
-    <p class="section-body">
+    <div class="section-label reveal" style="color:var(--gold);">Podcast</div>
+    <h2 class="section-title reveal delay-1" style="color:var(--gold-pale);">Ennodu Inainthiru on Spotify</h2>
+    <p class="section-body reveal delay-2">
       Shalini Ramachandran's podcast is where her poetry finds its voice — recorded reflections, spoken verse, and the kinds of conversations that happen only in the quiet hours. Click any episode to listen directly on Spotify.
     </p>
 
     <div class="podcast-grid">
-      <!-- Episode 1 — real Spotify link -->
-      <a href="https://open.spotify.com/episode/7sf4GvLVK8SnMfdhqe4Tuf" target="_blank" class="episode-card">
-        <div class="episode-num">Latest Episode · Sep 7, 2025 · 6 min</div>
+      <a href="https://open.spotify.com/episode/7sf4GvLVK8SnMfdhqe4Tuf" target="_blank" class="episode-card reveal delay-1">
+        <div class="episode-num">Latest · Sep 7, 2025 · 6 min</div>
         <div class="episode-title">"Whatever happens life has to go" 💗🪄</div>
         <div class="episode-desc">A heartfelt spoken word episode about moving forward no matter what — Shalz at her most honest and uplifting.</div>
         <div class="episode-foot">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
-
-      <!-- Episode 2 — real Spotify link -->
-      <a href="https://open.spotify.com/episode/6sVkdtUjcVK8wpFd0ftEwX" target="_blank" class="episode-card">
+      <a href="https://open.spotify.com/episode/6sVkdtUjcVK8wpFd0ftEwX" target="_blank" class="episode-card reveal delay-2">
         <div class="episode-num">Episode · Aug 10, 2025 · 7 min</div>
         <div class="episode-title">LIFE IS SHORT MAKE IT SWEET 🪄🧿❤️</div>
         <div class="episode-desc">Life is too short to hold back. Shalz serves an amazing topic to brighten your week and spread positivity.</div>
         <div class="episode-foot">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
-
-      <!-- Episode 3 — real Spotify link -->
-      <a href="https://open.spotify.com/episode/1lID40H0tHQetIhxBiGLUq" target="_blank" class="episode-card">
+      <a href="https://open.spotify.com/episode/1lID40H0tHQetIhxBiGLUq" target="_blank" class="episode-card reveal delay-3">
         <div class="episode-num">Episode · Jul 28, 2025 · 7 min</div>
         <div class="episode-title">TRY TRY TRY !!!! 🔥</div>
         <div class="episode-desc">A super-boost topic guaranteed to energise you. Keep trying — Shalz reminds you why persistence is everything.</div>
         <div class="episode-foot">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
-
-      <!-- Episode 4 — real Spotify link -->
-      <a href="https://open.spotify.com/episode/0X4LyI1MDKrLkNH9Ais4cv" target="_blank" class="episode-card">
+      <a href="https://open.spotify.com/episode/0X4LyI1MDKrLkNH9Ais4cv" target="_blank" class="episode-card reveal delay-4">
         <div class="episode-num">Episode · Jul 13, 2025 · 7 min</div>
         <div class="episode-title">OLD IS GOLD ❤️🪄💰</div>
-        <div class="episode-desc">A wonderful topic celebrating what endures — the things that age but never lose their shine. Don't miss this one.</div>
+        <div class="episode-desc">A wonderful topic celebrating what endures — the things that age but never lose their shine.</div>
         <div class="episode-foot">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <span class="duration">Open on Spotify ↗</span>
         </div>
       </a>
     </div>
 
-    <div class="spotify-embed-row" style="margin-top:2rem;">
+    <div class="spotify-embed-row reveal">
       <iframe
         src="https://open.spotify.com/embed/show/1rVRaemGWST0Zxme83IFcD?utm_source=generator&theme=0"
         width="100%" height="232" frameBorder="0"
@@ -642,73 +1030,77 @@
   </div>
 </div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Get in touch</div>
-  <h2 class="section-title">Connect with Shalini Ramachandran</h2>
+<!-- CONTACT — uses FormSubmit.co (no API key needed) -->
+<div class="contact-section-wrap" id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal">Get in touch</div>
+    <h2 class="section-title reveal delay-1">Connect with Shalini Ramachandran</h2>
 
-  <div class="contact-grid">
-    <div>
-      <p style="color:var(--ink-soft); margin-bottom:1.8rem; font-size:0.95rem; line-height:1.8;">
-        For collaborations, features, or just to say her poems made you feel something — reach out. She's building something beautiful and loves meeting people who feel it too.
-      </p>
-      <div class="contact-info">
-        <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank" class="contact-row">
-          <div class="contact-icon ci-spotify">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.35c-.2.3-.6.4-.9.2-2.47-1.5-5.59-1.84-9.26-.99-.35.08-.7-.13-.79-.49-.08-.35.13-.7.49-.79 4.01-.92 7.45-.52 10.24 1.15.3.18.4.59.22.92zm1.24-2.76c-.24.38-.75.5-1.13.26-2.83-1.74-7.14-2.24-10.49-1.23-.43.13-.89-.11-1.02-.54-.13-.43.11-.89.54-1.02 3.82-1.16 8.57-.59 11.84 1.4.38.24.5.75.26 1.13zm.1-2.87c-3.39-2.02-8.99-2.2-12.23-1.22-.52.16-1.07-.14-1.23-.66-.16-.52.14-1.07.66-1.23 3.72-1.13 9.91-.91 13.81 1.41.47.28.62.89.34 1.36-.28.47-.89.62-1.35.34z"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Podcast</div>
-            <div class="contact-value">ennodu inainthiru on Spotify</div>
-          </div>
-        </a>
-        <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="contact-row">
-          <div class="contact-icon ci-instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Instagram</div>
-            <div class="contact-value">@_ennodu_inainthiru_</div>
-          </div>
-        </a>
-        <a href="mailto:ennoduinainthiru@gmail.com" class="contact-row">
-          <div class="contact-icon ci-mail">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">ennoduinainthiru@gmail.com</div>
-          </div>
-        </a>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <p style="color:var(--ink-soft); margin-bottom:1.8rem; font-size:0.95rem; line-height:1.9;">
+          For collaborations, features, or just to say her poems made you feel something — reach out. She's building something beautiful and loves meeting people who feel it too.
+        </p>
+        <div class="contact-info">
+          <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD" target="_blank" class="contact-row">
+            <div class="contact-icon ci-spotify">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 14.35c-.2.3-.6.4-.9.2-2.47-1.5-5.59-1.84-9.26-.99-.35.08-.7-.13-.79-.49-.08-.35.13-.7.49-.79 4.01-.92 7.45-.52 10.24 1.15.3.18.4.59.22.92zm1.24-2.76c-.24.38-.75.5-1.13.26-2.83-1.74-7.14-2.24-10.49-1.23-.43.13-.89-.11-1.02-.54-.13-.43.11-.89.54-1.02 3.82-1.16 8.57-.59 11.84 1.4.38.24.5.75.26 1.13zm.1-2.87c-3.39-2.02-8.99-2.2-12.23-1.22-.52.16-1.07-.14-1.23-.66-.16-.52.14-1.07.66-1.23 3.72-1.13 9.91-.91 13.81 1.41.47.28.62.89.34 1.36-.28.47-.89.62-1.35.34z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Podcast</div>
+              <div class="contact-value">ennodu inainthiru on Spotify</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank" class="contact-row">
+            <div class="contact-icon ci-instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Instagram</div>
+              <div class="contact-value">@_ennodu_inainthiru_</div>
+            </div>
+          </a>
+          <a href="mailto:ennoduinainthiru@gmail.com" class="contact-row">
+            <div class="contact-icon ci-mail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">ennoduinainthiru@gmail.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="contact-form">
+          <h3>Send a message ✦</h3>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="fname">Your name</label>
+              <input type="text" id="fname" placeholder="What should she call you?" required>
+            </div>
+            <div class="form-group">
+              <label for="femail">Your email</label>
+              <input type="email" id="femail" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="fmsg">Message</label>
+              <textarea id="fmsg" rows="4" placeholder="Tell her what her work means to you, or what you'd like to create together..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">Send message →</button>
+            <div class="success-msg" id="successMsg">
+              ✓ Message sent to Shalini Ramachandran! She'll get back to you soon. 💛
+            </div>
+            <div class="error-msg" id="errorMsg">
+              ✕ Something went wrong. Please email directly at <a href="mailto:ennoduinainthiru@gmail.com" style="color:#8b2020;">ennoduinainthiru@gmail.com</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-
-    <div class="contact-form">
-      <h3>Send a message</h3>
-      <form id="contactForm" onsubmit="submitForm(event)" novalidate>
-        <div class="form-group">
-          <label for="fname">Your name</label>
-          <input type="text" id="fname" name="name" placeholder="What should she call you?" required>
-        </div>
-        <div class="form-group">
-          <label for="femail">Email</label>
-          <input type="email" id="femail" name="email" placeholder="your@email.com" required>
-        </div>
-        <div class="form-group">
-          <label for="fmsg">Message</label>
-          <textarea id="fmsg" name="message" rows="4" placeholder="Tell her what her work means to you, or what you'd like to create together..." required></textarea>
-        </div>
-        <button type="submit" class="form-submit" id="submitBtn">Send message →</button>
-        <div class="success-msg" id="successMsg">
-          ✓ Message sent! Shalini Ramachandran will get back to you soon.
-        </div>
-        <div class="error-msg" id="errorMsg">
-          ✕ Could not send message. Please try emailing directly at ennoduinainthiru@gmail.com
-        </div>
-      </form>
-    </div>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -720,70 +1112,101 @@
     <a href="#podcast">Podcast</a>
     <a href="#contact">Contact</a>
     <a href="https://www.instagram.com/_ennodu_inainthiru_/" target="_blank">Instagram</a>
-    <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD?si=Pf249OKkQeOg4PCSwSOYzA" target="_blank">Spotify</a>
+    <a href="https://open.spotify.com/show/1rVRaemGWST0Zxme83IFcD" target="_blank">Spotify</a>
   </div>
   <div class="footer-copy">© 2025 Shalini Ramachandran · Made with love for Tamil poetry and big dreams</div>
 </footer>
 
 <script>
-async function submitForm(event) {
-  event.preventDefault();
+/* ── PARTICLES ── */
+(function createParticles() {
+  const container = document.getElementById('particles');
+  const sizes = [4, 6, 8, 10, 5, 7];
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    p.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${8 + Math.random() * 12}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+/* ── NAV SCROLL SHADOW ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+/* ── CONTACT FORM — FormSubmit.co (no API key needed) ── */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
 
   const name    = document.getElementById('fname').value.trim();
   const email   = document.getElementById('femail').value.trim();
-  const msg     = document.getElementById('fmsg').value.trim();
+  const message = document.getElementById('fmsg').value.trim();
   const btn     = document.getElementById('submitBtn');
   const success = document.getElementById('successMsg');
-  const errMsg  = document.getElementById('errorMsg');
+  const errDiv  = document.getElementById('errorMsg');
 
-  // Hide previous messages
   success.style.display = 'none';
-  errMsg.style.display  = 'none';
+  errDiv.style.display  = 'none';
 
-  if (!name || !email || !msg) {
+  if (!name || !email || !message) {
     alert('Please fill in all fields before sending.');
     return;
   }
-
-  // Basic email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     alert('Please enter a valid email address.');
     return;
   }
 
-  btn.disabled    = true;
-  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Sending…';
 
   try {
     const res = await fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message: msg })
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, email, message })
     });
 
-    if (res.ok) {
+    const data = await res.json();
+
+    if (res.ok && (data.success === 'true' || data.success === true)) {
       success.style.display = 'block';
       document.getElementById('fname').value  = '';
       document.getElementById('femail').value = '';
       document.getElementById('fmsg').value   = '';
     } else {
-      let errDetail = '';
-      try {
-        const d = await res.json();
-        errDetail = d.error || '';
-      } catch (_) {}
-      errMsg.style.display = 'block';
-      if (errDetail) console.error('Server error:', errDetail);
+      errDiv.style.display = 'block';
     }
-  } catch (e) {
-    console.error('Network error:', e);
-    errMsg.style.display = 'block';
+  } catch (err) {
+    console.error(err);
+    errDiv.style.display = 'block';
   }
 
-  btn.disabled    = false;
-  btn.textContent = 'Send message →';
-}
+  btn.disabled = false;
+  btn.innerHTML = 'Send message →';
+});
 </script>
 </body>
 </html>
